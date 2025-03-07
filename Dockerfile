@@ -5,7 +5,7 @@ ARG DEBIAN_TAG=12.8-slim@sha256:d365f4920711a9074c4bcd178e8f457ee59250426441ab2a
 ARG GOLANG_TAG=1.24.0-alpine@sha256:2d40d4fc278dad38be0777d5e2a88a2c6dee51b0b29c97a764fc6c6a11ca893c
 
 # renovate: datasource=github-releases depName=hashicorp/terraform versioning=hashicorp
-ARG DEFAULT_TERRAFORM_VERSION=1.11.0
+ARG DEFAULT_TERRAFORM_VERSION=1.6.6
 # renovate: datasource=github-releases depName=opentofu/opentofu versioning=hashicorp
 ARG DEFAULT_OPENTOFU_VERSION=1.9.0
 # renovate: datasource=github-releases depName=open-policy-agent/conftest
@@ -20,11 +20,11 @@ ARG TARGETOS
 ARG TARGETARCH
 
 ARG ATLANTIS_VERSION=dev
-ENV ATLANTIS_VERSION=${ATLANTIS_VERSION}
+ENV ATLANTIS_VERSION="v0.33.0"
 ARG ATLANTIS_COMMIT=none
-ENV ATLANTIS_COMMIT=${ATLANTIS_COMMIT}
+ENV ATLANTIS_COMMIT="618d5ac"
 ARG ATLANTIS_DATE=unknown
-ENV ATLANTIS_DATE=${ATLANTIS_DATE}
+ENV ATLANTIS_DATE="2025-02-03T20:21:38.676Z"
 
 ARG DEFAULT_TERRAFORM_VERSION
 ENV DEFAULT_TERRAFORM_VERSION=${DEFAULT_TERRAFORM_VERSION}
@@ -179,31 +179,31 @@ USER atlantis
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["server"]
 
-# Stage 2 - Debian
-FROM debian-base AS debian
+# # Stage 2 - Debian
+# FROM debian-base AS debian
 
-EXPOSE ${ATLANTIS_PORT:-4141}
+# EXPOSE ${ATLANTIS_PORT:-4141}
 
-HEALTHCHECK --interval=5m --timeout=3s \
-  CMD curl -f http://localhost:${ATLANTIS_PORT:-4141}/healthz || exit 1
+# HEALTHCHECK --interval=5m --timeout=3s \
+#   CMD curl -f http://localhost:${ATLANTIS_PORT:-4141}/healthz || exit 1
 
-# Set up the 'atlantis' user and adjust permissions
-RUN useradd --create-home --user-group --shell /bin/bash atlantis && \
-    chown atlantis:root /home/atlantis/ && \
-    chmod u+rwx /home/atlantis/
+# # Set up the 'atlantis' user and adjust permissions
+# RUN useradd --create-home --user-group --shell /bin/bash atlantis && \
+#     chown atlantis:root /home/atlantis/ && \
+#     chmod u+rwx /home/atlantis/
 
-# copy atlantis binary
-COPY --from=builder /app/atlantis /usr/local/bin/atlantis
-# copy terraform binaries
-COPY --from=deps /usr/local/bin/terraform/terraform* /usr/local/bin/
-COPY --from=deps /usr/local/bin/tofu/tofu* /usr/local/bin/
-# copy dependencies
-COPY --from=deps /usr/local/bin/conftest /usr/local/bin/conftest
-COPY --from=deps /usr/bin/git-lfs /usr/bin/git-lfs
-# copy docker-entrypoint.sh
-COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+# # copy atlantis binary
+# COPY --from=builder /app/atlantis /usr/local/bin/atlantis
+# # copy terraform binaries
+# COPY --from=deps /usr/local/bin/terraform/terraform* /usr/local/bin/
+# COPY --from=deps /usr/local/bin/tofu/tofu* /usr/local/bin/
+# # copy dependencies
+# COPY --from=deps /usr/local/bin/conftest /usr/local/bin/conftest
+# COPY --from=deps /usr/bin/git-lfs /usr/bin/git-lfs
+# # copy docker-entrypoint.sh
+# COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
-# Set the entry point to the atlantis user and run the atlantis command
-USER atlantis
-ENTRYPOINT ["docker-entrypoint.sh"]
-CMD ["server"]
+# # Set the entry point to the atlantis user and run the atlantis command
+# USER atlantis
+# ENTRYPOINT ["docker-entrypoint.sh"]
+# CMD ["server"]

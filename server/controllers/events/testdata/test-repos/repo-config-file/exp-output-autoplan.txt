@@ -21,12 +21,12 @@ Plan: 1 to add, 0 to change, 0 to destroy.
 ```
 
 * :arrow_forward: To **apply** this plan, comment:
-  ```shell
+  ```
   atlantis apply -d infrastructure/staging
   ```
 * :put_litter_in_its_place: To **delete** this plan and lock, click [here](lock-url)
 * :repeat: To **plan** this project again, comment:
-  ```shell
+  ```
   atlantis plan -d infrastructure/staging
   ```
 
@@ -48,12 +48,12 @@ Plan: 1 to add, 0 to change, 0 to destroy.
 ```
 
 * :arrow_forward: To **apply** this plan, comment:
-  ```shell
+  ```
   atlantis apply -d infrastructure/production
   ```
 * :put_litter_in_its_place: To **delete** this plan and lock, click [here](lock-url)
 * :repeat: To **plan** this project again, comment:
-  ```shell
+  ```
   atlantis plan -d infrastructure/production
   ```
 
@@ -63,10 +63,10 @@ Plan: 1 to add, 0 to change, 0 to destroy.
 2 projects, 2 with changes, 0 with no changes, 0 failed
 
 * :fast_forward: To **apply** all unapplied plans from this Pull Request, comment:
-  ```shell
+  ```
   atlantis apply
   ```
 * :put_litter_in_its_place: To **delete** all plans and locks from this Pull Request, comment:
-  ```shell
+  ```
   atlantis unlock
   ```

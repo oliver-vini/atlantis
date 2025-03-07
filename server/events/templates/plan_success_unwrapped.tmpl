@@ -8,7 +8,7 @@ This plan was not saved because one or more projects failed and automerge requir
 {{ else -}}
 {{ if not .DisableApply -}}
 * :arrow_forward: To **apply** this plan, comment:
-  ```shell
+  ```
   {{ .ApplyCmd }}
   ```
 {{ end -}}
@@ -16,7 +16,7 @@ This plan was not saved because one or more projects failed and automerge requir
 * :put_litter_in_its_place: To **delete** this plan and lock, click [here]({{ .LockURL }})
 {{ end -}}
 * :repeat: To **plan** this project again, comment:
-  ```shell
+  ```
   {{ .RePlanCmd }}
   ```
 {{ end -}}
