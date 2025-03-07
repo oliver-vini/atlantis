@@ -23,22 +23,22 @@ Changes to Outputs:
 </details>
 
 * :arrow_forward: To **apply** this plan, comment:
-  ```shell
+  ```
   atlantis apply -p staging
   ```
 * :put_litter_in_its_place: To **delete** this plan and lock, click [here](lock-url)
 * :repeat: To **plan** this project again, comment:
-  ```shell
+  ```
   atlantis plan -p staging
   ```
 Plan: 1 to add, 0 to change, 0 to destroy.
 
 ---
 * :fast_forward: To **apply** all unapplied plans from this Pull Request, comment:
-  ```shell
+  ```
   atlantis apply
   ```
 * :put_litter_in_its_place: To **delete** all plans and locks from this Pull Request, comment:
-  ```shell
+  ```
   atlantis unlock
   ```

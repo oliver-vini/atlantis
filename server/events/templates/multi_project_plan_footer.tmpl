@@ -5,11 +5,11 @@
 {{ len .Results }} projects, {{ .NumPlansWithChanges }} with changes, {{ .NumPlansWithNoChanges }} with no changes, {{ .NumPlanFailures }} failed
 {{ if and (not .PlansDeleted) (ne .DisableApplyAll true) }}
 * :fast_forward: To **apply** all unapplied plans from this {{ .VcsRequestType }}, comment:
-  ```shell
+  ```
   {{ .ExecutableName }} apply
   ```
 * :put_litter_in_its_place: To **delete** all plans and locks from this {{ .VcsRequestType }}, comment:
-  ```shell
+  ```
   {{ .ExecutableName }} unlock
   ```
 {{ end -}}
